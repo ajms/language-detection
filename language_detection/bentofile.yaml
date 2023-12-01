@@ -1,6 +1,7 @@
 service: 'service:svc'
 include:
   - '*.py'
+  - data/indiclid-ftn/model_baseline_roman.bin
 python:
   packages:
     - torch==2.1.1
@@ -11,8 +12,3 @@ docker:
 models:
   - indiclid-bert:latest
   - xlm-roberta-base-language-detection:latest
-runners:
-  batching:
-    enabled: true
-    max_batch_size: 100
-    max_latency_ms: 500

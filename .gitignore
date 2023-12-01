@@ -1,5 +1,6 @@
 # additional
-data/
+language_detection/data/
+language_detection/monitoring/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
