@@ -7,7 +7,7 @@ from transformers import AutoTokenizer, pipeline
 from language_detection.indic_mapping import IndicLID_lang_code_dict_reverse
 from language_detection.utils.path_helpers import get_project_root
 
-device = torch.device(0 if torch.cuda.is_available() else -1)
+device = torch.device(0 if torch.cuda.is_available() else "cpu")
 input_texts = [
     "എന്റെ പേര് അലക്സ് സിബു",
     "Jürgen ist ein schräger Vogel",
@@ -24,7 +24,8 @@ print(pipe.predict(input_texts))
 # %%
 # IndicLID-BERT for latin letters Indian
 IndicLID_BERT = torch.load(
-    get_project_root() / "data/indiclid-bert/basline_nn_simple.pt"
+    get_project_root() / "data/indiclid-bert/basline_nn_simple.pt",
+    map_location=device,
 )
 IndicLID_BERT.config.update(
     {
@@ -56,16 +57,28 @@ print(prediction)
 print(score)
 
 # %%
-# bentoml.transformers.save_model(
-#     name="xlm-roberta-base-language-detection",
-#     pipeline=pipe,
-#     task_name="text-classification",
-# )
-# bentoml.transformers.save_model(
-#     name="indiclid-bert",
-#     pipeline=pipe2,
-#     task_name="text-classification",
-# )
+bentoml.transformers.save_model(
+    name="xlm-roberta-base-language-detection",
+    pipeline=pipe,
+    task_name="text-classification",
+    signatures={  # model signatures for runner inference
+        "predict": {
+            "batchable": True,
+            "batch_dim": 0,
+        }
+    },
+)
+bentoml.transformers.save_model(
+    name="indiclid-bert",
+    pipeline=pipe2,
+    task_name="text-classification",
+    signatures={  # model signatures for runner inference
+        "predict": {
+            "batchable": True,
+            "batch_dim": 0,
+        }
+    },
+)
 # bentoml.transformers.import_model(
 #     name="indiclid-bert",
 #     model_name_or_path=get_project_root() / "data/indiclid-bert/pipeline",

@@ -12,8 +12,6 @@ class FastTextRunnable(bentoml.Runnable):
     @bentoml.Runnable.method(batchable=True, batch_dim=0)
     def predict(self, input_text: str | list[str]) -> dict[str, any]:
         predictions, scores = self.model.predict(input_text)
-        print(input_text)
-        print({"label": predictions, "score": scores})
         if isinstance(input_text, list):
             return [
                 {"label": prediction[0], "score": score}
