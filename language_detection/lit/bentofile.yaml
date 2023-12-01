@@ -1,0 +1,18 @@
+service: 'service:svc'
+include:
+  - '*.py'
+python:
+  packages:
+    - torch==2.1.1
+    - transformers==4.35.2
+    - fasttext-wheel==0.9.2
+docker:
+  cuda_version: 12.1.1
+models:
+  - indiclid-bert:latest
+  - xlm-roberta-base-language-detection:latest
+runners:
+  batching:
+    enabled: true
+    max_batch_size: 100
+    max_latency_ms: 500
