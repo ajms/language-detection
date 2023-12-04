@@ -21,6 +21,8 @@ async def main(batch: list[str]):
 
 
 if __name__ == "__main__":
+    from rich import print
+
     batch = {
         "English": "The quick brown fox jumps over the lazy dog, showcasing its agility and speed while the dog remains calm and relaxed.",
         "Spanish": "El rápido zorro marrón salta sobre el perro perezoso, mostrando su agilidad y velocidad mientras que el perro permanece tranquilo y relajado.",
@@ -40,6 +42,14 @@ if __name__ == "__main__":
         "Odia": "ଭାରତୀୟ ସଂସ୍କୃତି ଅତି ବିଵିଧ ଏବଂ ସମୃଦ୍ଧ ଅଛି।",
         "Punjabi": "ਭਾਰਤੀ ਸੱਭਿਆਚਾਰ ਬਹੁਤ ਵਿਵਿਧ ਅਤੇ ਸਮ੃ਦ੍ਧ ਹੈ।",
         "Assamese": "ভাৰতীয় সংস্কৃতি বহুত বিভিন্ন আৰু সমৃদ্ধ।",
+        "Malayalam_latin": "Njaan prathinidhikk orupaadu chirattikal illaatha saukaryathil vellarikkunnu.",
+        "Punjabi_latin": "Main roz kheera khaanda haan, jadon tak us vich koi keede nahi hunde.",
+        "Telugu_latin": "Nenu prati roju dosakaya tinestunnaanu, adilo ento keetakalu lekunda.",
     }
 
-    print(asyncio.run(main(list(batch.values()))))
+    results = {
+        key: result
+        for key, result in zip(batch.keys(), asyncio.run(main(list(batch.values()))))
+    }
+
+    print(results)

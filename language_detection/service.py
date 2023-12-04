@@ -87,7 +87,7 @@ async def combined_lid(text: str) -> dict[str, any]:
                 role="output",
                 data_type="json",
             )
-            if predictions[1][0]["label"] != "hi":
+            if predictions[0][0]["label"] != "hi" and predictions[0][0]["score"] > 0.98:
                 return predictions[0]
             else:
                 return predictions[1]

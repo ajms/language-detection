@@ -24,7 +24,7 @@ print(pipe.predict(input_texts))
 # %%
 # IndicLID-BERT for latin letters Indian
 IndicLID_BERT = torch.load(
-    get_project_root() / "data/indiclid-bert/basline_nn_simple.pt",
+    get_project_root() / "language_detection/data/indiclid-bert/basline_nn_simple.pt",
     map_location=device,
 )
 IndicLID_BERT.config.update(
@@ -46,11 +46,16 @@ pipe2 = pipeline(
 
 prediction = pipe2.predict(input_texts)
 print(prediction)
-pipe2.save_pretrained(get_project_root() / "data/indiclid-bert/pipeline")
+pipe2.save_pretrained(
+    get_project_root() / "language_detection/data/indiclid-bert/pipeline"
+)
 # %%
 # IndicLID-FTN for Indian scripts
 IndicLID_FTN = fasttext.load_model(
-    str(get_project_root() / "data/indiclid-ftn/model_baseline_roman.bin")
+    str(
+        get_project_root()
+        / "language_detection/data/indiclid-ftn/model_baseline_roman.bin"
+    )
 )
 prediction, score = IndicLID_FTN.predict(input_texts)
 print(prediction)

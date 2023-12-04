@@ -14,7 +14,7 @@ Download models from [AI4Bharat](https://github.com/AI4Bharat/IndicLID)
 wget https://github.com/AI4Bharat/IndicLID/releases/download/v1.0/indiclid-ftn.zip
 wget https://github.com/AI4Bharat/IndicLID/releases/download/v1.0/indiclid-bert.zip
 mkdir -p data
-unzip indiclid-ftn.zip -d data/
-unzip indiclid-bert.zip -d data/
+unzip indiclid-ftn.zip -d language_detection/data/
+unzip indiclid-bert.zip -d language_detection/data/
 rm indiclid-ftn.zip indiclid-bert.zip
 ```
