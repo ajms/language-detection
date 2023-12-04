@@ -1,6 +1,6 @@
 import pytest
 
-from language_detection.lit.detect_script import detect_script
+from language_detection.detect_script import detect_script
 
 scripts = {
     "Devanagari": "भारतीय संस्कृति बहुत विविध और समृद्ध है।",

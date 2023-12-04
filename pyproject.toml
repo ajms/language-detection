@@ -27,6 +27,13 @@ pre-commit = "^3.5.0"
 ipykernel = "^6.27.1"
 pytest = "^7.4.3"
 
+
+[tool.poetry.group.llm.dependencies]
+openllm = "^0.4.34"
+vllm = "^0.2.3"
+auto-gptq = "^0.5.1"
+optimum = "^1.14.1"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
